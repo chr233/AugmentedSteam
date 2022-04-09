@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const {merge} = require("webpack-merge");
 const path = require("path");
 const MergeJsonWebpackPlugin = require("merge-json-webpack-plugin");
-const ExtensionReloader = require("webpack-extension-reloader");
+const ExtensionReloader = require("webpack-ext-reloader");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 const ManifestTransformerPlugin = require("./Plugins/ManifestTransformerPlugin.cjs");
 const PreprocessChangelogPlugin = require("./Plugins/PreprocessChangelogPlugin.cjs");
@@ -62,9 +62,10 @@ class WebpackRunner {
                 "groups": [
                     {
                         "files": [
-                            "config/manifests/manifest_common.json",
-                            `config/manifests/manifest_${this._browser}.json`,
-                            `config/manifests/manifest_${this._mode}.json`,
+                            "config/manifests/common.json",
+                            `config/manifests/${this._mode}.json`,
+                            `config/manifests/${this._browser}/common.json`,
+                            `config/manifests/${this._browser}/${this._mode}.json`,
                         ],
                         "to": "manifest.json",
                     }
